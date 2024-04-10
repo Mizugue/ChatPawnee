@@ -1,0 +1,21 @@
+#teste temporario css
+
+.botao1 {
+  background-color: #300;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.botao2 {
+  background-color: #000;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}

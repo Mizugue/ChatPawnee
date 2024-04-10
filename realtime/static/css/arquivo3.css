@@ -1,0 +1,16 @@
+h1-sublinhado {
+  text-decoration: underline;
+}
+
+.h1-grande-verde {
+  font-size: 36px;
+  color: #008000;
+}
+
+.h1-margem {
+  margin: 20px 0;
+}
+
+.h1-fonte-serif {
+  font-family: Georgia, serif;
+}
