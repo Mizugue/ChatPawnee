@@ -1,0 +1,72 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Pawnee Chat</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="" class="w3-bar-item w3-button"><b>Pawnee </b>Chat</a>
+    <div class="w3-right w3-hide-small">
+      <a href="../" class="w3-bar-item w3-button">About</a>
+    </div>
+  </div>
+</div>
+<br/><br/><br/>
+<center><h1 class="text">Bem vindo a sala de chat!</h1>
+    <br/>
+    <img src="https://cdn-icons-png.flaticon.com/512/55/55009.png" width="30">
+</center>
+<br/><br/>
+    <div class="container">
+        <textarea readonly class="form-control form-control-lg" id="sala" cols="70" rows="15"></textarea><br/>
+        <center><input  class="form-control form-control-lg " id="texto" type="text" size="50"/><br/>
+        {% buttons %}
+
+            <input class="btn btn-primary btn-lg" id="botao" type="button" value="Enviar" />
+        {% endbuttons %}
+        </center>
+    </div>
+
+
+
+{% bootstrap_javascript jquery='full' %}
+<script>
+    var nome_sala = {{ nome_sala_json }};
+
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + nome_sala + '/');
+
+    chatSocket.onmessage = function(e){
+        var dados = JSON.parse(e.data);
+        var mensagem = dados['mensagem'];
+        document.querySelector('#sala').value += (mensagem + '\n');
+    };
+
+    chatSocket.onclose = function(e){
+        console.error('O chat encerrou de forma inesperada.');
+    };
+
+    document.querySelector('#texto').focus();
+    document.querySelector('#texto').onkeyup = function(e){
+        if(e.keyCode === 13){
+            document.querySelector('#botao').click();
+        }
+    };
+
+    document.querySelector('#botao').onclick = function(e){
+        var mensagemInput = document.querySelector('#texto');
+        var mensagem = mensagemInput.value;
+        chatSocket.send(JSON.stringify({
+            'mensagem': mensagem
+        }));
+        mensagemInput.value = '';
+    };
+</script>
+</body>
+</html>

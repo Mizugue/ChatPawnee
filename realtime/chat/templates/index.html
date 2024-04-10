@@ -1,0 +1,66 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Chat Pawnee</title>
+    {% bootstrap_css %}
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="" class="w3-bar-item w3-button"><b>Pawnee </b>Chat</a>
+    <div class="w3-right w3-hide-small">
+      <a href="about" class="w3-bar-item w3-button">About</a>
+    </div>
+  </div>
+</div>
+
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+
+<center>
+ <div class="container">
+     <p></p>
+
+     <h2>Qual sala voce deseja entrar?</h2><br/>
+     <br/>
+        <input class="input-group-text" id="nome_sala" name="nome_sala" type="text" placeholder="Nome da sala..."><br/>
+        {% buttons %}
+     <br/>
+            <input id="botao" class=" btn-active btn-lg btn btn-primary" type="button" value="Entrar"/>
+        {% endbuttons %}
+
+     <img src="https://www.justcolor.net/es/wp-content/uploads/sites/3/nggallery/native-americans/colorear-para-adultos-india-de-america-92332.jpg" width="200" height="200">
+ </div>
+
+
+
+ <script>
+     document.querySelector('#nome_sala').focus();
+     document.querySelector('#nome_sala').onkeyup = function(e){
+         if(e.keyCode === 13){
+             document.querySelector('#botao').click();
+         }
+     };
+
+     document.querySelector('#botao').onclick = function(e){
+         var nome_sala = document.querySelector('#nome_sala').value;
+         if(nome_sala != ""){
+             window.location.pathname = '/chat/' + nome_sala + '/';
+         }else{
+             alert('Você precisa informar o nome da sala.');
+             document.querySelector('#nome_sala').focus();
+         }
+     };
+
+ </script>
+
+
+  <div class="footer-text">©  All Rights reserved by Mzg </div>
+{% bootstrap_javascript jquery='full' %}</center>
+</body>
+</html>
